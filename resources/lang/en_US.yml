@@ -1,0 +1,60 @@
+command.not-found: "§4Command [0] not found."
+command.help: |
+  §aWorldsX Help.
+  /wx help §7Show this help.
+  /wx list §7List all worlds.
+  /wx info §7Get information about a world.
+  /wx load §7Load a world.
+  /wx unload §7Unload a world.
+  /wx create §7Create a new world.
+  /wx delete §7Delete a world.
+  /wx duplicate §7Duplicate a world.
+
+command.world-not-found: "§4World [0] not found."
+
+command.info.usage: "§4Usage: /wx info <world>"
+command.info.not-exists: "§4World [0] does not exist."
+command.info.folder-name: "§aFolder Name: §7[0]"
+command.info.display-name: "§aDisplay Name: §7[0]"
+command.info.players: "§aPlayers([0]): §7[1]"
+command.info.seed: "§aSeed: §7[0]"
+command.info.generator: "§aGenerator: §7[0]"
+command.info.time: "§aTime: §7[0]"
+
+command.load.usage: "§4Usage: /wx load <world>"
+command.load.loaded: "§4World [0] is loaded already."
+command.load.success: "§aWorld [0] loaded."
+command.load.error: "§4Error loading world [0]: [1]."
+
+command.unload.usage: "§4Usage: /wx unload <world>"
+command.unload.unloaded: "§4World [0] is unloaded already."
+command.unload.success: "§aWorld [0] unloaded."
+command.unload.error: "§4Error unloading world [0]: [1]."
+
+command.list.header: "§aAvailable worlds:"
+command.list.loaded: "§aLoaded"
+command.list.unloaded: "§cUnloaded"
+command.list.world: "§7[0] > [1], §7[2] players."
+
+command.create.usage: "§4Usage: /wx create <world> <generator> <seed>"
+command.create.exists: "§4World [0] already exists."
+command.create.generator-not-found: "§4Generator [0] not found."
+command.create.failed: "§4Error creating world [0]: [1]."
+command.create.success: "§aWorld [0] generator: [1] seed: [2] created."
+
+command.remove.usage: "§4Usage: /wx remove <world>"
+command.remove.not-exists: "§4World [0] is removed already."
+command.remove.success: "§aWorld [0] removed."
+command.remove.error: "§4Error removing world [0]: [1]."
+
+command.rename.usage: "§4Usage: /wx rename <orig> <dest>"
+command.rename.not-exists: "§4World [0] not exists."
+command.rename.exists: "§4World [1] already exists."
+command.rename.success: "§aWorld [0] renamed to [1]."
+command.rename.error: "§4Error renaming world [0] to [1]: [2]."
+
+command.duplicate.usage: "§4Usage: /wx duplicate <orig> <dest>"
+command.duplicate.not-exists: "§4World [0] not exists."
+command.duplicate.exists: "§4World [1] already exists."
+command.duplicate.success: "§aWorld [0] duplicated to [1]."
+command.duplicate.error: "§4Error duplicating world [0] to [1]: [2]."
