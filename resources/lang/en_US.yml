@@ -10,8 +10,6 @@ command.help: |
   /wx delete §7Delete a world.
   /wx duplicate §7Duplicate a world.
 
-command.world-not-found: "§4World [0] not found."
-
 command.info.usage: "§4Usage: /wx info <world>"
 command.info.not-exists: "§4World [0] does not exist."
 command.info.folder-name: "§aFolder Name: §7[0]"

@@ -29,8 +29,8 @@ class WorldsX extends PluginBase {
 		foreach ($languages as $lang) {
 			$this->saveResource("lang/$lang.yml", true);
 		}
-		//$selectedLanguage = $this->getConfig()->get('language', 'en_US');
-		$selectedLanguage = 'en_US';
+		$selectedLanguage = $this->getConfig()->get('language', 'en_US');
+		//$selectedLanguage = 'en_US';
 		$filepath = Path::join($this->getDataFolder(), "lang/$selectedLanguage.yml");
 		if (!file_exists($filepath)) {
 			$this->getLogger()->error("Language file $selectedLanguage.yml not found, using en_US.yml");
