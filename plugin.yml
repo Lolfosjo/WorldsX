@@ -1,5 +1,5 @@
 name: WorldsX
-version: 0.0.1
+version: 1.0.0
 api: 4.0.0
 main: blackjack200\worldsx\WorldsX
 author: Blackjack200
@@ -7,4 +7,7 @@ website: https://github.com/Blackjack200/WorldsX.git
 permissions:
   worldsx.command:
     description: "Allows the user to use the /worldsx command."
+    default: op
+  worldsx.gamerule:
+    description: "Allows the user to use the /gamerule command."
     default: op

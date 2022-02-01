@@ -58,3 +58,10 @@ command.duplicate.not-exists: "§4世界 [0] 不存在."
 command.duplicate.exists: "§4世界 [1] 已经存在."
 command.duplicate.success: "§a世界 [0] 复制到 [1]."
 command.duplicate.error: "§4复制世界 [0] 到 [1] 错误: [2]."
+
+
+command.gamerule.usage: "§4用法: /gamerule <规则> <值> <世界>"
+command.gamerule.rule-not-exists: "§4游戏规则 [0] 不存在."
+command.gamerule.world-not-exists: "§4世界 [0] 不存在."
+command.gamerule.success: "§a世界 [2] 的游戏规则 [0] 设置为 [1]."
+command.gamerule.error: "§4设置世界 [2] 的游戏模式 [0] 为 [1] 出错."

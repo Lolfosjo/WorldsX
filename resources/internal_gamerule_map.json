@@ -1,0 +1,137 @@
+{
+  "commandBlocksEnabled": {
+    "internal": "commandBlocksEnabled",
+    "default": true,
+    "type": "bool"
+  },
+  "commandBlockOutput": {
+    "internal": "commandBlockOutput",
+    "default": true,
+    "type": "bool"
+  },
+  "doDaylightCycle": {
+    "internal": "doDaylightCycle",
+    "default": true,
+    "type": "bool"
+  },
+  "doEntityDrops": {
+    "internal": "doEntityDrops",
+    "default": true,
+    "type": "bool"
+  },
+  "doFireTick": {
+    "internal": "doFireTick",
+    "default": true,
+    "type": "bool"
+  },
+  "doInsomnia": {
+    "internal": "doInsomnia",
+    "default": true,
+    "type": "bool"
+  },
+  "doImmediateRespawn": {
+    "internal": "doImmediateRespawn",
+    "default": false,
+    "type": "bool"
+  },
+  "doMobLoot": {
+    "internal": "doMobLoot",
+    "default": true,
+    "type": "bool"
+  },
+  "doTileDrops": {
+    "internal": "doTileDrops",
+    "default": true,
+    "type": "bool"
+  },
+  "doWeatherCycle": {
+    "internal": "doWeatherCycle",
+    "default": true,
+    "type": "bool"
+  },
+  "drowningDamage": {
+    "internal": "drowningDamage",
+    "default": true,
+    "type": "bool"
+  },
+  "fallDamage": {
+    "internal": "fallDamage",
+    "default": true,
+    "type": "bool"
+  },
+  "fireDamage": {
+    "internal": "fireDamage",
+    "default": true,
+    "type": "bool"
+  },
+  "freezeDamage": {
+    "internal": "freezeDamage",
+    "default": true,
+    "type": "bool"
+  },
+  "functionCommandLimit": {
+    "internal": "functionCommandLimit",
+    "default": true,
+    "type": "bool"
+  },
+  "keepInventory": {
+    "internal": "keepInventory",
+    "default": false,
+    "type": "bool"
+  },
+  "maxCommandChainLength": {
+    "internal": "maxCommandChainLength",
+    "default": 65536,
+    "type": "int"
+  },
+  "mobGriefing": {
+    "internal": "mobGriefing",
+    "default": true,
+    "type": "bool"
+  },
+  "naturalRegeneration": {
+    "internal": "naturalRegeneration",
+    "default": true,
+    "type": "bool"
+  },
+  "pvp": {
+    "internal": "pvp",
+    "default": true,
+    "type": "bool"
+  },
+  "randomTickSpeed": {
+    "internal": "randomTickSpeed",
+    "default": 1,
+    "type": "int"
+  },
+  "sendCommandFeedback": {
+    "internal": "sendCommandFeedback",
+    "default": true,
+    "type": "bool"
+  },
+  "showCoordinates": {
+    "internal": "showCoordinates",
+    "default": true,
+    "type": "bool"
+  },
+  "showDeathMessage": {
+    "internal": "showDeathMessage",
+    "default": true,
+    "type": "bool"
+  },
+  "spawnRadius": {
+    "internal": "spawnRadius",
+    "default": 5,
+    "type": "int"
+  },
+  "tntExplodes": {
+    "internal": "tntExplodes",
+    "default": true,
+    "type": "bool"
+  },
+  "showTags": {
+    "internal": "showTags",
+    "default": true,
+    "type": "bool"
+  }
+}

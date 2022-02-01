@@ -1,0 +1,45 @@
+<?php
+
+namespace blackjack200\worldsx\session;
+
+use blackjack200\worldsx\world\GameRuleCollection;
+use blackjack200\worldsx\world\GameRuleUtil;
+use blackjack200\worldsx\world\types\GameRules;
+use pocketmine\utils\AssumptionFailedError;
+use pocketmine\world\format\io\data\BaseNbtWorldData;
+use pocketmine\world\World;
+use RuntimeException;
+
+class WorldGameRules {
+	/** @var GameRuleCollection[] */
+	private static array $gameRules = [];
+
+	public static function setupGameRules(World $w) : void {
+		$data = $w->getProvider()->getWorldData();
+		if ($data instanceof BaseNbtWorldData) {
+			$c = GameRuleUtil::parse($data);
+			if ($c !== null) {
+				self::$gameRules[$w->getFolderName()] = $c;
+				self::initialGameRules($c, $w);
+			} else {
+				throw new RuntimeException('Failed to parse game rules for world ' . $w->getFolderName());
+			}
+		} else {
+			throw new RuntimeException('World ' . $w->getFolderName() . ' is not a NBT-data-based world');
+		}
+	}
+
+	protected static function initialGameRules(GameRuleCollection $c, World $w) : void {
+		if (!$c->get(GameRules::DO_DAYLIGHT_CYCLE)) {
+			$w->stopTime();
+		}
+	}
+
+	public static function getGameRule(World $world) : GameRuleCollection {
+		return self::$gameRules[$world->getFolderName()] ?? throw new AssumptionFailedError('Game rules not loaded');
+	}
+
+	public static function remove(World $world) : void {
+		unset(self::$gameRules[$world->getFolderName()]);
+	}
+}

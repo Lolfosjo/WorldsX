@@ -2,9 +2,12 @@
 
 namespace blackjack200\worldsx;
 
+use blackjack200\worldsx\command\GameRuleCommand;
 use blackjack200\worldsx\command\WorldsXCommand;
 use blackjack200\worldsx\generator\VoidGenerator;
 use blackjack200\worldsx\lang\Language;
+use blackjack200\worldsx\session\WorldsXListener;
+use blackjack200\worldsx\world\types\GameRuleParser;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
 use pocketmine\world\generator\GeneratorManager;
@@ -16,12 +19,19 @@ class WorldsX extends PluginBase {
 		$this->saveDefaultConfig();
 		$language = $this->setupLanguage();
 		GeneratorManager::getInstance()->addGenerator(VoidGenerator::class, "void", fn() => null);
-		if (Server::getInstance()->getPluginManager()->getPlugin('MultiWorld') === null) {
+		if (Server::getInstance()->getPluginManager()->getPlugin('MultiWorld') !== null) {
 			$this->getLogger()->warning($language->translateString('multiworld.warning') ?? throw new RuntimeException());
 			$this->getServer()->getPluginManager()->disablePlugin($this);
 			return;
 		}
+		GameRuleParser::setup(
+			json_decode(stream_get_contents($this->getResource('gamerule_name_map.json')), true),
+			json_decode(stream_get_contents($this->getResource('internal_gamerule_map.json')), true),
+		);
+		$listener = new WorldsXListener();
+		$this->getServer()->getPluginManager()->registerEvents($listener, $this);
 		$this->getServer()->getCommandMap()->register('wx', new WorldsXCommand($language));
+		$this->getServer()->getCommandMap()->register('gamerule', new GameRuleCommand($language, $listener));
 	}
 
 	protected function onDisable() : void {
