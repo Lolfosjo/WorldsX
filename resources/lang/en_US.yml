@@ -1,3 +1,5 @@
+multiworld.warning: "MultiWorld is already loaded, please remove it to use WorldsX"
+
 command.not-found: "§4Command [0] not found."
 command.help: |
   §aWorldsX Help.

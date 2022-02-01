@@ -1,3 +1,5 @@
+multiworld.warning: "MultiWorld 已经被加载, 请删除它以继续加载 WorldsX."
+
 command.not-found: "§4找不到指令 [0]."
 command.help: |
   §aWorldsX Help.
