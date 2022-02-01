@@ -1,6 +1,6 @@
 # WorldsX
 
-CzechPMDevs/MultiWorld isn't good, use this
+Another MultiWorld Plugin
 
 /wx help
 
