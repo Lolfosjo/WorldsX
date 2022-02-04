@@ -7,7 +7,7 @@ use blackjack200\worldsx\command\WorldsXCommand;
 use blackjack200\worldsx\generator\VoidGenerator;
 use blackjack200\worldsx\lang\Language;
 use blackjack200\worldsx\session\WorldsXListener;
-use blackjack200\worldsx\world\types\GameRuleParser;
+use blackjack200\worldsx\world\types\GameRuleMapping;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
 use pocketmine\world\generator\GeneratorManager;
@@ -24,7 +24,7 @@ class WorldsX extends PluginBase {
 			$this->getServer()->getPluginManager()->disablePlugin($this);
 			return;
 		}
-		GameRuleParser::setup(
+		GameRuleMapping::setup(
 			json_decode(stream_get_contents($this->getResource('gamerule_name_map.json')), true),
 			json_decode(stream_get_contents($this->getResource('internal_gamerule_map.json')), true),
 		);

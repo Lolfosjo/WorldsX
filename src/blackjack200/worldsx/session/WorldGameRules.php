@@ -4,7 +4,7 @@ namespace blackjack200\worldsx\session;
 
 use blackjack200\worldsx\world\GameRuleCollection;
 use blackjack200\worldsx\world\GameRuleUtil;
-use blackjack200\worldsx\world\types\GameRules;
+use blackjack200\worldsx\world\types\DefaultGameRules;
 use pocketmine\utils\AssumptionFailedError;
 use pocketmine\world\format\io\data\BaseNbtWorldData;
 use pocketmine\world\World;
@@ -20,7 +20,7 @@ class WorldGameRules {
 			$c = GameRuleUtil::parse($data);
 			if ($c !== null) {
 				self::$gameRules[$w->getFolderName()] = $c;
-				self::initialGameRules($c, $w);
+				self::applyGameRules($c, $w);
 			} else {
 				throw new RuntimeException('Failed to parse game rules for world ' . $w->getFolderName());
 			}
@@ -29,13 +29,13 @@ class WorldGameRules {
 		}
 	}
 
-	protected static function initialGameRules(GameRuleCollection $c, World $w) : void {
-		if (!$c->get(GameRules::DO_DAYLIGHT_CYCLE)) {
+	protected static function applyGameRules(GameRuleCollection $c, World $w) : void {
+		if (!$c->get(DefaultGameRules::DO_DAYLIGHT_CYCLE)) {
 			$w->stopTime();
 		}
 	}
 
-	public static function getGameRule(World $world) : GameRuleCollection {
+	public static function mustGetGameRuleCollection(World $world) : GameRuleCollection {
 		return self::$gameRules[$world->getFolderName()] ?? throw new AssumptionFailedError('Game rules not loaded');
 	}
 

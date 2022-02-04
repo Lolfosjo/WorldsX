@@ -2,7 +2,7 @@
 
 namespace blackjack200\worldsx\world\types;
 
-class GameRules {
+class DefaultGameRules {
 	public const COMMAND_BLOCKS_ENABLED = "commandBlocksEnabled";
 	public const COMMAND_BLOCK_OUTPUT = "commandBlockOutput";
 	public const DO_DAYLIGHT_CYCLE = "doDaylightCycle";

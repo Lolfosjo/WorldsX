@@ -2,14 +2,14 @@
 
 namespace blackjack200\worldsx\world;
 
-use blackjack200\worldsx\world\types\GameRuleParser;
+use blackjack200\worldsx\world\types\GameRuleMapping;
 use pocketmine\world\format\io\data\BaseNbtWorldData;
 
 class GameRuleUtil {
 	public static function parse(BaseNbtWorldData $data) : ?GameRuleCollection {
 		$rules = $data->getCompoundTag()->getCompoundTag("GameRules");
 		if ($rules === null) {
-			$rules = GameRuleParser::getDefaultTags();
+			$rules = GameRuleMapping::getDefaultTags();
 			$data->getCompoundTag()->setTag('GameRules', $rules);
 			$data->save();
 		}

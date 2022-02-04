@@ -8,7 +8,7 @@ use pocketmine\network\mcpe\protocol\types\FloatGameRule;
 use pocketmine\network\mcpe\protocol\types\GameRule;
 use pocketmine\network\mcpe\protocol\types\IntGameRule;
 
-class GameRuleParser {
+class GameRuleMapping {
 	private static array $externalToInternal;
 	private static array $internalToExternal;
 	private static array $internalSchema;

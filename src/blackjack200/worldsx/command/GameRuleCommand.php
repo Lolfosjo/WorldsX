@@ -6,7 +6,7 @@ use blackjack200\worldsx\lang\Language;
 use blackjack200\worldsx\session\WorldGameRules;
 use blackjack200\worldsx\session\WorldsXListener;
 use blackjack200\worldsx\world\GameRuleUtil;
-use blackjack200\worldsx\world\types\GameRuleParser;
+use blackjack200\worldsx\world\types\GameRuleMapping;
 use blackjack200\worldsx\world\WorldUtil;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
@@ -46,12 +46,12 @@ class GameRuleCommand extends Command {
 				$sender->sendMessage($this->lang->translateString('command.gamerule.world-not-exists', [$world]));
 				return;
 			}
-			$internal = GameRuleParser::toInternal($name);
+			$internal = GameRuleMapping::toInternal($name);
 			if ($internal === null) {
 				$sender->sendMessage($this->lang->translateString('command.gamerule.rule-not-exists', [$name]));
 				return;
 			}
-			$g = WorldGameRules::getGameRule($world);
+			$g = WorldGameRules::mustGetGameRuleCollection($world);
 			$g->set($internal, $value);
 			$data = $world->getProvider()->getWorldData();
 			if ($data instanceof BaseNbtWorldData) {
