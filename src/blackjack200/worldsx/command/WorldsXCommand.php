@@ -13,19 +13,24 @@ use blackjack200\worldsx\command\subcommand\impl\RenameSubCommand;
 use blackjack200\worldsx\command\subcommand\impl\UnloadSubCommand;
 use blackjack200\worldsx\command\subcommand\SubCommand;
 use blackjack200\worldsx\lang\Language;
+use blackjack200\worldsx\WorldsX;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\utils\InvalidCommandSyntaxException;
+use pocketmine\plugin\Plugin;
+use pocketmine\plugin\PluginOwned;
 
-class WorldsXCommand extends Command {
+class WorldsXCommand extends Command implements PluginOwned {
 	/** @var SubCommand[] */
 	private array $subCommands = [];
 	private Language $lang;
+	private WorldsX $plugin;
 
-	public function __construct(Language $lang) {
+	public function __construct(Language $lang, WorldsX $plugin) {
 		parent::__construct('worldsx', 'WorldsX command', '/wx', ['mw', 'wx']);
 		$this->setPermission('worldsx.command');
 		$this->lang = $lang;
+		$this->plugin = $plugin;
 		$this->registerSubCommand('help', HelpSubCommand::class, ['h']);
 		$this->registerSubCommand('info', InfoSubCommand::class, ['i']);
 		$this->registerSubCommand('load', LoadSubCommand::class, ['l', 'ld']);
@@ -63,5 +68,9 @@ class WorldsXCommand extends Command {
 		foreach ($alias as $a) {
 			$this->subCommands[$a] = $this->subCommands[$name];
 		}
+	}
+
+	public function getOwningPlugin() : Plugin {
+		return $this->plugin;
 	}
 }

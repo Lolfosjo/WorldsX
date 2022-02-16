@@ -30,8 +30,9 @@ class WorldsX extends PluginBase {
 		);
 		$listener = new WorldsXListener();
 		$this->getServer()->getPluginManager()->registerEvents($listener, $this);
-		$this->getServer()->getCommandMap()->register('wx', new WorldsXCommand($language));
-		$this->getServer()->getCommandMap()->register('gamerule', new GameRuleCommand($language, $listener));
+		$registerCmd = fn($cmd) => $this->getServer()->getCommandMap()->register($this->getName(), $cmd);
+		$registerCmd(new WorldsXCommand($language, $this));
+		$registerCmd(new GameRuleCommand($language, $listener, $this));
 	}
 
 	protected function onDisable() : void {
