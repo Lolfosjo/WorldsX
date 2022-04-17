@@ -29,9 +29,9 @@ class TeleportSubCommand extends SubCommand {
 		try {
 			$w = WorldUtil::loadWorld($dst);
 			$targetObj->teleport($w->getSpawnLocation());
-			$this->mustSendTranslation($sender, 'command.teleport.success', [$dst, $target]);
+			$this->mustSendTranslation($sender, 'command.teleport.success', [$target, $dst]);
 		} catch (Throwable $e) {
-			$this->mustSendTranslation($sender, 'command.teleport.error', [$dst, $target, $e->getMessage()]);
+			$this->mustSendTranslation($sender, 'command.teleport.error', [$target, $dst, $e->getMessage()]);
 		}
 	}
 }
