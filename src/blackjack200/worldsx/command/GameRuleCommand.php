@@ -36,19 +36,19 @@ class GameRuleCommand extends Command implements PluginOwned {
 				$sender->sendMessage($this->lang->translateString('command.gamerule.usage'));
 				return;
 			}
-			$world = $args[2] ?? null;
-			if ($world === null) {
+			$worldName = $args[2] ?? null;
+			if ($worldName === null) {
 				if ($sender instanceof Player) {
-					$world = $sender->getWorld()->getFolderName();
+					$worldName = $sender->getWorld()->getFolderName();
 				} else {
-					$world = Server::getInstance()->getWorldManager()->getDefaultWorld()->getFolderName();
+					$worldName = Server::getInstance()->getWorldManager()->getDefaultWorld()->getFolderName();
 				}
 			}
 
 			[$name, $value] = $args;
-			$world = WorldUtil::findWorldByFolderName($world);
+			$world = WorldUtil::findWorldByFolderName($worldName);
 			if ($world === null) {
-				$sender->sendMessage($this->lang->translateString('command.gamerule.world-not-exists', [$world]));
+				$sender->sendMessage($this->lang->translateString('command.gamerule.world-not-exists', [$worldName]));
 				return;
 			}
 			$internal = GameRuleMapping::toInternal($name);
