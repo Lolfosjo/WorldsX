@@ -15,10 +15,13 @@ use RuntimeException;
 use Webmozart\PathUtil\Path;
 
 class WorldsX extends PluginBase {
+	protected function onLoad() : void {
+		GeneratorManager::getInstance()->addGenerator(VoidGenerator::class, "void", fn() => null);
+	}
+
 	protected function onEnable() : void {
 		$this->saveDefaultConfig();
 		$language = $this->setupLanguage();
-		GeneratorManager::getInstance()->addGenerator(VoidGenerator::class, "void", fn() => null);
 		if (Server::getInstance()->getPluginManager()->getPlugin('MultiWorld') !== null) {
 			$this->getLogger()->warning($language->translateString('multiworld.warning') ?? throw new RuntimeException());
 			$this->getServer()->getPluginManager()->disablePlugin($this);
