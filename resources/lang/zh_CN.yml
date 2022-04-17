@@ -11,6 +11,7 @@ command.help: |
   /wx create §7创建世界.
   /wx delete §7删除世界.
   /wx duplicate §7复制世界.
+  /wx teleport §7传送到世界.
 
 command.info.usage: "§4用法: /wx info <世界>"
 command.info.not-exists: "§4世界 [0] 不存在."
@@ -59,6 +60,11 @@ command.duplicate.exists: "§4世界 [1] 已经存在."
 command.duplicate.success: "§a世界 [0] 复制到 [1]."
 command.duplicate.error: "§4复制世界 [0] 到 [1] 错误: [2]."
 
+command.teleport.usage: "§4用法: /wx tp <世界> <玩家>"
+command.teleport.not-exists: "§4世界 [0] 不存在."
+command.teleport.player-not-exists: "§4玩家 [0] 不存在."
+command.teleport.success: "§a玩家 [0] 已经被传送到世界 [1]."
+command.teleport.error: "§4传送玩家 [0] 到世界 [1] 错误: [2]."
 
 command.gamerule.usage: "§4用法: /gamerule <规则> <值> <世界>"
 command.gamerule.rule-not-exists: "§4游戏规则 [0] 不存在."

@@ -13,6 +13,7 @@ Another MultiWorld Plugin
 /wx create Create a new world.
 /wx delete Delete a world.
 /wx duplicate Duplicate a world.
+/wx teleport Teleport to a world.
 
 /gamerule <rule> <value> <world>
 ```

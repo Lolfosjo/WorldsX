@@ -10,6 +10,7 @@ use blackjack200\worldsx\command\subcommand\impl\ListSubCommand;
 use blackjack200\worldsx\command\subcommand\impl\LoadSubCommand;
 use blackjack200\worldsx\command\subcommand\impl\RemoveSubCommand;
 use blackjack200\worldsx\command\subcommand\impl\RenameSubCommand;
+use blackjack200\worldsx\command\subcommand\impl\TeleportSubCommand;
 use blackjack200\worldsx\command\subcommand\impl\UnloadSubCommand;
 use blackjack200\worldsx\command\subcommand\SubCommand;
 use blackjack200\worldsx\lang\Language;
@@ -40,6 +41,7 @@ class WorldsXCommand extends Command implements PluginOwned {
 		$this->registerSubCommand('remove', RemoveSubCommand::class, ['rm', 'delete', 'del']);
 		$this->registerSubCommand('duplicate', DuplicateSubCommand::class, ['dup']);
 		$this->registerSubCommand('rename', RenameSubCommand::class);
+		$this->registerSubCommand('teleport', TeleportSubCommand::class, ['t', 'tp']);
 	}
 
 	public function execute(CommandSender $sender, string $commandLabel, array $args) {

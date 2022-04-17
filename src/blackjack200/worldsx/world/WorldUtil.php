@@ -111,6 +111,9 @@ class WorldUtil {
 			if ($dir === '.' || $dir === '..') {
 				unset($dirs[$i]);
 			}
+			if (!is_dir(Path::join($basePath, $dir))) {
+				unset($dirs[$i]);
+			}
 		}
 		return $dirs;
 	}

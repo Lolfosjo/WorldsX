@@ -11,6 +11,7 @@ command.help: |
   /wx create §7Create a new world.
   /wx delete §7Delete a world.
   /wx duplicate §7Duplicate a world.
+  /wx teleport §7Teleport to a world.
 
 command.info.usage: "§4Usage: /wx info <world>"
 command.info.not-exists: "§4World [0] does not exist."
@@ -58,6 +59,13 @@ command.duplicate.not-exists: "§4World [0] not exists."
 command.duplicate.exists: "§4World [1] already exists."
 command.duplicate.success: "§aWorld [0] duplicated to [1]."
 command.duplicate.error: "§4Error duplicating world [0] to [1]: [2]."
+
+command.teleport.usage: "§4Usage: /wx tp <world> <player>"
+command.teleport.not-exists: "§4World [0] not exists."
+command.teleport.player-not-exists: "§4Player [0] not exists."
+command.teleport.success: "§a[0] has been teleported to world [1]."
+command.teleport.error: "§4Error when teleport [0] to world [1]: [2]."
+
 
 command.gamerule.usage: "§4Usage: /gamerule <rule> <value> <world>"
 command.gamerule.rule-not-exists: "§4Gamerule [0] not exists."
