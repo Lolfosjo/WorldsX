@@ -8,7 +8,7 @@ use pocketmine\utils\Filesystem;
 use pocketmine\world\format\io\data\BaseNbtWorldData;
 use pocketmine\world\World;
 use pocketmine\world\WorldCreationOptions;
-use Webmozart\PathUtil\Path;
+use Symfony\Component\Filesystem\Path;
 
 class WorldUtil {
 	public static function findWorldByFolderName(string $name) : ?World {
@@ -107,6 +107,9 @@ class WorldUtil {
 	public static function getWorlds() : array {
 		$basePath = Path::join(Server::getInstance()->getDataPath(), 'worlds');
 		$dirs = scandir($basePath, SCANDIR_SORT_NONE);
+		if ($dirs === false) {
+			return [];
+		}
 		foreach ($dirs as $i => $dir) {
 			if ($dir === '.' || $dir === '..') {
 				unset($dirs[$i]);

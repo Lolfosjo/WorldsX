@@ -12,7 +12,7 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
 use pocketmine\world\generator\GeneratorManager;
 use RuntimeException;
-use Webmozart\PathUtil\Path;
+use Symfony\Component\Filesystem\Path;
 
 class WorldsX extends PluginBase {
 	protected function onLoad() : void {

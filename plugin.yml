@@ -1,6 +1,6 @@
 name: WorldsX
-version: 1.1.2
-api: 4.0.0
+version: 1.2.0
+api: 5.0.0
 main: blackjack200\worldsx\WorldsX
 author: Blackjack200
 website: https://github.com/Blackjack200/WorldsX.git
