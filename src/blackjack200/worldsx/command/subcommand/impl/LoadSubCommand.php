@@ -20,7 +20,6 @@ class LoadSubCommand extends SubCommand {
 		} else {
 			try {
 				$w = WorldUtil::loadWorld($worldName);
-				var_dump(WorldGameRules::mustGetGameRuleCollection($w));
 				$this->mustSendTranslation($sender, 'command.load.success', [$worldName]);
 			} catch (Throwable $thr) {
 				$this->mustSendTranslation($sender, 'command.load.error', [$worldName, $thr->getMessage()]);

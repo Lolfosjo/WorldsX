@@ -16,7 +16,7 @@ class GameRuleCollection {
 	public static function from(CompoundTag $tag) : self {
 		$rules = [];
 		foreach ($tag->getValue() as $internal => $value) {
-			$rules[$internal] = GameRuleMapping::convertVal($internal, json_decode((string)$value->getValue()));
+			$rules[$internal] = json_decode((string) $value->getValue());
 		}
 		return new self($rules);
 	}
@@ -24,10 +24,7 @@ class GameRuleCollection {
 	public function toCompoundTag() : CompoundTag {
 		$tag = new CompoundTag();
 		foreach ($this->rules as $internal => $value) {
-			$t = GameRuleMapping::create($internal, $value);
-			if ($t !== null) {
-				$tag->setString($internal, json_encode($value));
-			}
+			$tag->setString($internal, json_encode($value));
 		}
 		return $tag;
 	}
