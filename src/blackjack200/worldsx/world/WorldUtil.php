@@ -19,7 +19,7 @@ class WorldUtil {
 				return $world;
 			}
 		}
-		return null;
+		return self::tryLoadWorld($name);
 	}
 
 	public static function unloadWorldByFolderName(string $name) : void {
@@ -32,13 +32,7 @@ class WorldUtil {
 	}
 
 	public static function loadWorld(string $world) : World {
-		$worldManager = Server::getInstance()->getWorldManager();
-		if ($worldManager->loadWorld($world, true)) {
-			$w = $worldManager->getWorldByName($world);
-			assert($w instanceof World);
-			return $w;
-		}
-		throw new InvalidArgumentException("Failed when loading $world");
+		return self::tryLoadWorld($world) ?? throw new InvalidArgumentException("Failed when loading $world");
 	}
 
 	public static function rename(string $old, string $new) : void {
@@ -119,5 +113,15 @@ class WorldUtil {
 			}
 		}
 		return $dirs;
+	}
+
+	private static function tryLoadWorld(string $world) : ?World {
+		$worldManager = Server::getInstance()->getWorldManager();
+		if ($worldManager->loadWorld($world, true)) {
+			$w = $worldManager->getWorldByName($world);
+			assert($w instanceof World);
+			return $w;
+		}
+		return null;
 	}
 }

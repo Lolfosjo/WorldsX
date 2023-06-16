@@ -23,7 +23,6 @@ use pocketmine\event\world\WorldUnloadEvent;
 use pocketmine\network\mcpe\protocol\SettingsCommandPacket;
 use pocketmine\player\Player;
 use pocketmine\Server;
-use pocketmine\utils\AssumptionFailedError;
 use pocketmine\world\World;
 
 class WorldsXListener implements Listener {
@@ -36,13 +35,13 @@ class WorldsXListener implements Listener {
 		}
 	}
 
-	protected function mustGetSession(Player $e) : PlayerSession {
-		return $this->sessions[spl_object_hash($e)] ?? throw new AssumptionFailedError('Player session not found');
+	protected function getSession(Player $e) : ?PlayerSession {
+		return $this->sessions[spl_object_hash($e)] ?? null;
 	}
 
 	public function syncGameRules(World $world) : void {
 		foreach ($world->getPlayers() as $player) {
-			$this->mustGetSession($player)->sendGameRules();
+			$this->getSession($player)?->sendGameRules();
 		}
 	}
 
@@ -70,8 +69,7 @@ class WorldsXListener implements Listener {
 	public function onPlayerTeleport(EntityTeleportEvent $event) : void {
 		$p = $event->getEntity();
 		if ($p instanceof Player && $event->getFrom()->getWorld() !== $event->getTo()->getWorld()) {
-			$s = $this->mustGetSession($p);
-			$s->syncGameRules(WorldGameRules::mustGetGameRuleCollection($event->getTo()->getWorld()));
+			$this->getSession($p)?->syncGameRules(WorldGameRules::mustGetGameRuleCollection($event->getTo()->getWorld()));
 		}
 	}
 
