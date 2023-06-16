@@ -46,7 +46,7 @@ class GameRuleCommand extends Command implements PluginOwned {
 			}
 
 			[$name, $value] = $args;
-			$world = WorldUtil::findWorldByFolderName($worldName);
+			$world = WorldUtil::findWorldByFolderName($worldName, true);
 			if ($world === null) {
 				$sender->sendMessage($this->lang->translateString('command.gamerule.world-not-exists', [$worldName]));
 				return;

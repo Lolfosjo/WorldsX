@@ -17,6 +17,7 @@ class GameRuleUtil {
 	}
 
 	public static function save(BaseNbtWorldData $data, GameRuleCollection $rules) : void {
+		var_dump($rules);
 		$data->getCompoundTag()->setTag('GameRules', $rules->toCompoundTag());
 		$data->save();
 	}

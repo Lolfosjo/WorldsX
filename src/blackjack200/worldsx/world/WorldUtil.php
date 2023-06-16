@@ -11,7 +11,7 @@ use pocketmine\world\WorldCreationOptions;
 use Symfony\Component\Filesystem\Path;
 
 class WorldUtil {
-	public static function findWorldByFolderName(string $name) : ?World {
+	public static function findWorldByFolderName(string $name, bool $tryLoad = false) : ?World {
 		// Assume that folderName is unique
 		$worlds = Server::getInstance()->getWorldManager()->getWorlds();
 		foreach ($worlds as $world) {
@@ -19,7 +19,10 @@ class WorldUtil {
 				return $world;
 			}
 		}
-		return self::tryLoadWorld($name);
+		if($tryLoad) {
+			return self::tryLoadWorld($name);
+		}
+		return null;
 	}
 
 	public static function unloadWorldByFolderName(string $name) : void {
