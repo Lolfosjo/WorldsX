@@ -12,7 +12,7 @@ class VoidGenerator extends Generator {
 		//We don't know world spawn position so use PM4 default one.
 		$spawnChunkPos = 256 >> Chunk::COORD_BIT_SIZE;
 		if ($chunkX === $spawnChunkPos && $chunkZ === $spawnChunkPos) {
-			$world->getChunk($chunkX, $chunkZ)->setFullBlock(0, 64, 0, VanillaBlocks::BEDROCK()->getFullId());
+			$world->getChunk($chunkX, $chunkZ)->setBlockStateId(0, 64, 0, VanillaBlocks::BEDROCK()->getStateId());
 		}
 	}
 
