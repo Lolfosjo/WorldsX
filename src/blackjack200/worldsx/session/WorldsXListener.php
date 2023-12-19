@@ -85,7 +85,11 @@ class WorldsXListener implements Listener {
 
 	public function onRegenerate(EntityRegainHealthEvent $event) : void {
 		$entity = $event->getEntity();
-		if ($entity instanceof Living && !$entity->getEffects()->has(VanillaEffects::REGENERATION())) {
+		if (
+			$entity instanceof Living &&
+			$event->getRegainReason() === EntityRegainHealthEvent::CAUSE_SATURATION &&
+			!$entity->getEffects()->has(VanillaEffects::REGENERATION())
+		) {
 			$g = WorldGameRules::mustGetGameRuleCollection($entity->getWorld());
 			if (!$g->get(DefaultGameRules::NATURAL_REGENERATION)) {
 				$event->cancel();
