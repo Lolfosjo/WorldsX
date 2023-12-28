@@ -17,18 +17,19 @@ class GameRuleMapping {
 		self::$externalToInternal = [];
 		self::$internalToExternal = [];
 		foreach ($nameMapping as $external => $internal) {
-			self::$externalToInternal[$external] = $internal;
-			self::$internalToExternal[$internal] = $external;
+			self::$externalToInternal[mb_strtolower($external)] = $internal;
+			self::$externalToInternal[mb_strtolower($internal)] = $internal;
+			self::$internalToExternal[mb_strtolower($internal)] = $external;
 		}
 		self::$internalSchema = $gameRuleMap;
 	}
 
 	public static function toInternal(string $external) : ?string {
-		return self::$externalToInternal[$external] ?? null;
+		return self::$externalToInternal[mb_strtolower($external)] ?? null;
 	}
 
 	public static function toExternal(string $internal) : ?string {
-		return self::$internalToExternal[$internal] ?? null;
+		return self::$internalToExternal[mb_strtolower($internal)] ?? null;
 	}
 
 	public static function create(string $internal, $val) : ?GameRule {
@@ -51,9 +52,9 @@ class GameRuleMapping {
 			return $val;
 		}
 		return match ($schema['type']) {
-			'bool' => strtolower($val) === 'true',
-			'int' => (int)$val,
-			'float' => (float)$val,
+			'bool' => is_bool($val) ? $val : strtolower($val) === 'true',
+			'int' => (int) $val,
+			'float' => (float) $val,
 			default => $val,
 		};
 	}

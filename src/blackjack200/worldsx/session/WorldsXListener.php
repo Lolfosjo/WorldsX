@@ -3,10 +3,12 @@
 namespace blackjack200\worldsx\session;
 
 use blackjack200\worldsx\world\types\DefaultGameRules;
+use pocketmine\block\VanillaBlocks;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\entity\Living;
 use pocketmine\entity\object\PrimedTNT;
 use pocketmine\event\block\BlockBreakEvent;
+use pocketmine\event\block\BlockSpreadEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityDeathEvent;
@@ -47,11 +49,9 @@ class WorldsXListener implements Listener {
 
 	public function onPlayerJoin(PlayerJoinEvent $e) : void {
 		$p = $e->getPlayer();
-		$w = $p->getWorld();
-		$g = WorldGameRules::mustGetGameRuleCollection($w);
-		$s = new PlayerSession($p, $g);
+		$s = new PlayerSession($p);
 		$this->sessions[spl_object_hash($p)] = $s;
-		$s->syncGameRules($g);
+		$s->sendGameRules();
 	}
 
 	public function onPlayerQuit(PlayerQuitEvent $e) : void {
@@ -69,7 +69,7 @@ class WorldsXListener implements Listener {
 	public function onPlayerTeleport(EntityTeleportEvent $event) : void {
 		$p = $event->getEntity();
 		if ($p instanceof Player && $event->getFrom()->getWorld() !== $event->getTo()->getWorld()) {
-			$this->getSession($p)?->syncGameRules(WorldGameRules::mustGetGameRuleCollection($event->getTo()->getWorld()));
+			$this->getSession($p)?->sendGameRules(WorldGameRules::mustGetGameRuleCollection($event->getTo()->getWorld()));
 		}
 	}
 
@@ -156,6 +156,15 @@ class WorldsXListener implements Listener {
 		}
 		if ($g->get(DefaultGameRules::KEEP_INVENTORY)) {
 			$event->setKeepInventory(true);
+		}
+	}
+
+	public function a(BlockSpreadEvent $event) : void {
+		$g = WorldGameRules::mustGetGameRuleCollection($event->getSource()->getPosition()->getWorld());
+		if ($event->getSource()->hasSameTypeId(VanillaBlocks::FIRE())) {
+			if (!$g->get(DefaultGameRules::DO_FIRE_TICK)) {
+				$event->cancel();
+			}
 		}
 	}
 }

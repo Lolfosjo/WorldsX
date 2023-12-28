@@ -8,20 +8,16 @@ use pocketmine\player\Player;
 
 class PlayerSession {
 	public Player $player;
-	public GameRuleCollection $collection;
 
-	public function __construct(Player $player, GameRuleCollection $collection) {
-		$this->collection = $collection;
+	public function __construct(Player $player) {
 		$this->player = $player;
 	}
 
-	public function syncGameRules(GameRuleCollection $collection) : void {
-		$this->collection = $collection;
-		$this->sendGameRules();
-	}
-
-	public function sendGameRules() : void {
-		$pk = GameRulesChangedPacket::create($this->collection->toGameRules());
+	public function sendGameRules(?GameRuleCollection $rules = null) : void {
+		if ($rules === null) {
+			$rules = WorldGameRules::mustGetGameRuleCollection($this->player->getWorld());
+		}
+		$pk = GameRulesChangedPacket::create($rules->toGameRules());
 		$this->player->getNetworkSession()->sendDataPacket($pk);
 	}
 }

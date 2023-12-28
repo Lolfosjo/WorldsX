@@ -59,6 +59,7 @@ class GameRuleCommand extends Command implements PluginOwned {
 			$g = WorldGameRules::mustGetGameRuleCollection($world);
 			$g->set($internal, $value);
 			$data = $world->getProvider()->getWorldData();
+			$args[] = $world->getFolderName();
 			if ($data instanceof BaseNbtWorldData) {
 				GameRuleUtil::save($data, $g);
 				$this->listener->syncGameRules($world);
