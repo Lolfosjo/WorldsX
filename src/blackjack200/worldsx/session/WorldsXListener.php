@@ -18,7 +18,6 @@ use pocketmine\event\entity\EntityTeleportEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\player\PlayerJoinEvent;
-use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\event\server\DataPacketReceiveEvent;
 use pocketmine\event\world\WorldLoadEvent;
 use pocketmine\event\world\WorldUnloadEvent;
@@ -26,19 +25,21 @@ use pocketmine\network\mcpe\protocol\SettingsCommandPacket;
 use pocketmine\player\Player;
 use pocketmine\Server;
 use pocketmine\world\World;
+use WeakMap;
 
 class WorldsXListener implements Listener {
-	/** @var PlayerSession[] */
-	private array $sessions = [];
+	/** @var WeakMap<PlayerSession> */
+	private WeakMap $sessions;
 
 	public function __construct() {
+		$this->sessions = new WeakMap();
 		foreach (Server::getInstance()->getWorldManager()->getWorlds() as $world) {
 			WorldGameRules::setupGameRules($world);
 		}
 	}
 
 	protected function getSession(Player $e) : ?PlayerSession {
-		return $this->sessions[spl_object_hash($e)] ?? null;
+		return $this->sessions[$e] ?? null;
 	}
 
 	public function syncGameRules(World $world) : void {
@@ -50,12 +51,8 @@ class WorldsXListener implements Listener {
 	public function onPlayerJoin(PlayerJoinEvent $e) : void {
 		$p = $e->getPlayer();
 		$s = new PlayerSession($p);
-		$this->sessions[spl_object_hash($p)] = $s;
+		$this->sessions[$p] = $s;
 		$s->sendGameRules();
-	}
-
-	public function onPlayerQuit(PlayerQuitEvent $e) : void {
-		unset($this->sessions[spl_object_hash($e->getPlayer())]);
 	}
 
 	public function onWorldLoad(WorldLoadEvent $event) : void {
