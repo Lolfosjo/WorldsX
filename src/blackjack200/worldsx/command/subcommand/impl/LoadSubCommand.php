@@ -3,7 +3,6 @@
 namespace blackjack200\worldsx\command\subcommand\impl;
 
 use blackjack200\worldsx\command\subcommand\SubCommand;
-use blackjack200\worldsx\session\WorldGameRules;
 use blackjack200\worldsx\world\WorldUtil;
 use pocketmine\command\CommandSender;
 use pocketmine\command\utils\InvalidCommandSyntaxException;

@@ -19,7 +19,7 @@ class WorldUtil {
 				return $world;
 			}
 		}
-		if($tryLoad) {
+		if ($tryLoad) {
 			return self::tryLoadWorld($name);
 		}
 		return null;
