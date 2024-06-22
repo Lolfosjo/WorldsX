@@ -30,7 +30,7 @@ class WorldsX extends PluginBase {
 		}
 		GameRuleMapping::setup(
 			json_decode(Filesystem::fileGetContents($this->getResourcePath('gamerule_name_map.json')), true, 512, JSON_THROW_ON_ERROR),
-			json_decode(Filesystem::fileGetContents(($this->getResourcePath('internal_gamerule_map.json')), true), false, 512, JSON_THROW_ON_ERROR)
+			json_decode(Filesystem::fileGetContents($this->getResourcePath('internal_gamerule_map.json')), true, 512, JSON_THROW_ON_ERROR)
 		);
 		$listener = new WorldsXListener();
 		$this->getServer()->getPluginManager()->registerEvents($listener, $this);
