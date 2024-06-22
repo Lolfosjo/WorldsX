@@ -10,6 +10,7 @@ use blackjack200\worldsx\session\WorldsXListener;
 use blackjack200\worldsx\world\types\GameRuleMapping;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
+use pocketmine\utils\Filesystem;
 use pocketmine\world\generator\GeneratorManager;
 use RuntimeException;
 use Symfony\Component\Filesystem\Path;
@@ -28,8 +29,8 @@ class WorldsX extends PluginBase {
 			return;
 		}
 		GameRuleMapping::setup(
-			json_decode(stream_get_contents($this->getResource('gamerule_name_map.json')), true),
-			json_decode(stream_get_contents($this->getResource('internal_gamerule_map.json')), true),
+			json_decode(Filesystem::fileGetContents($this->getResourcePath('gamerule_name_map.json')), true, 512, JSON_THROW_ON_ERROR),
+			json_decode(Filesystem::fileGetContents(($this->getResourcePath('internal_gamerule_map.json')), true), false, 512, JSON_THROW_ON_ERROR)
 		);
 		$listener = new WorldsXListener();
 		$this->getServer()->getPluginManager()->registerEvents($listener, $this);
