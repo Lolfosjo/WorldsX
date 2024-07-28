@@ -29,9 +29,11 @@ class WorldGameRules {
 		}
 	}
 
-	protected static function applyGameRules(GameRuleCollection $c, World $w) : void {
+	public static function applyGameRules(GameRuleCollection $c, World $w) : void {
 		if (!$c->get(DefaultGameRules::DO_DAYLIGHT_CYCLE)) {
 			$w->stopTime();
+		} else {
+			$w->startTime();
 		}
 	}
 
