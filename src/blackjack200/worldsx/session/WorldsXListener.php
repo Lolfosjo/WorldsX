@@ -2,6 +2,7 @@
 
 namespace blackjack200\worldsx\session;
 
+use blackjack200\worldsx\world\GameRuleUtil;
 use blackjack200\worldsx\world\types\DefaultGameRules;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\entity\effect\VanillaEffects;
@@ -25,34 +26,22 @@ use pocketmine\network\mcpe\protocol\SettingsCommandPacket;
 use pocketmine\player\Player;
 use pocketmine\Server;
 use pocketmine\world\World;
-use WeakMap;
 
 class WorldsXListener implements Listener {
-	/** @var WeakMap<PlayerSession> */
-	private WeakMap $sessions;
-
 	public function __construct() {
-		$this->sessions = new WeakMap();
 		foreach (Server::getInstance()->getWorldManager()->getWorlds() as $world) {
 			WorldGameRules::setupGameRules($world);
 		}
 	}
 
-	protected function getSession(Player $e) : ?PlayerSession {
-		return $this->sessions[$e] ?? null;
-	}
-
 	public function syncGameRules(World $world) : void {
 		foreach ($world->getPlayers() as $player) {
-			$this->getSession($player)?->sendGameRules();
+			GameRuleUtil::send($player);
 		}
 	}
 
 	public function onPlayerJoin(PlayerJoinEvent $e) : void {
-		$p = $e->getPlayer();
-		$s = new PlayerSession($p);
-		$this->sessions[$p] = $s;
-		$s->sendGameRules();
+		GameRuleUtil::send($e->getPlayer());
 	}
 
 	public function onWorldLoad(WorldLoadEvent $event) : void {
@@ -66,7 +55,7 @@ class WorldsXListener implements Listener {
 	public function onPlayerTeleport(EntityTeleportEvent $event) : void {
 		$p = $event->getEntity();
 		if ($p instanceof Player && $event->getFrom()->getWorld() !== $event->getTo()->getWorld()) {
-			$this->getSession($p)?->sendGameRules(WorldGameRules::mustGetGameRuleCollection($event->getTo()->getWorld()));
+			GameRuleUtil::send($p, WorldGameRules::mustGetGameRuleCollection($event->getTo()->getWorld()));
 		}
 	}
 
