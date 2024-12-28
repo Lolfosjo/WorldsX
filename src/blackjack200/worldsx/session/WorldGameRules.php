@@ -7,6 +7,7 @@ use blackjack200\worldsx\world\GameRuleUtil;
 use blackjack200\worldsx\world\types\DefaultGameRules;
 use pocketmine\utils\AssumptionFailedError;
 use pocketmine\world\format\io\data\BaseNbtWorldData;
+use pocketmine\world\format\ThreadedWorldProvider;
 use pocketmine\world\World;
 use RuntimeException;
 
@@ -16,6 +17,10 @@ class WorldGameRules {
 
 	public static function setupGameRules(World $w) : void {
 		$data = $w->getProvider()->getWorldData();
+		if (interface_exists(ThreadedWorldProvider::class)) {
+			$data = $data->get();
+		}
+		var_dump($data::class);
 		if ($data instanceof BaseNbtWorldData) {
 			$c = GameRuleUtil::parse($data);
 			if ($c !== null) {
