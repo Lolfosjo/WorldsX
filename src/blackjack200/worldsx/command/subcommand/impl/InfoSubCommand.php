@@ -31,7 +31,7 @@ class InfoSubCommand extends SubCommand {
 				$world->getSeed(),
 			]);
 			$this->mustSendTranslation($sender, 'command.info.generator', [
-				$world->getProvider()->getWorldData()->getGenerator(),
+				$world->getProvider()->getWorldData()->get()->getGenerator(),
 			]);
 			$this->mustSendTranslation($sender, 'command.info.time', [
 				$world->getTime(),

@@ -20,7 +20,6 @@ class WorldGameRules {
 		if (interface_exists(ThreadedWorldProvider::class)) {
 			$data = $data->get();
 		}
-		var_dump($data::class);
 		if ($data instanceof BaseNbtWorldData) {
 			$c = GameRuleUtil::parse($data);
 			if ($c !== null) {

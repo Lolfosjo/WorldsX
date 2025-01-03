@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use pocketmine\Server;
 use pocketmine\utils\Filesystem;
 use pocketmine\world\format\io\data\BaseNbtWorldData;
+use pocketmine\world\format\ThreadedWorldProvider;
 use pocketmine\world\World;
 use pocketmine\world\WorldCreationOptions;
 use Symfony\Component\Filesystem\Path;
@@ -52,6 +53,9 @@ class WorldUtil {
 		rename($oldPath, $newPath);
 		$world = self::loadWorld($new);
 		$worldData = $world->getProvider()->getWorldData();
+		if (interface_exists(ThreadedWorldProvider::class)) {
+			$worldData = $worldData->get();
+		}
 		if (!($worldData instanceof BaseNbtWorldData)) {
 			throw new InvalidArgumentException('World data is not BaseNbtWorldData');
 		}

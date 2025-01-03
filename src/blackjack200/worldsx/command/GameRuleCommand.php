@@ -16,6 +16,7 @@ use pocketmine\plugin\Plugin;
 use pocketmine\plugin\PluginOwned;
 use pocketmine\Server;
 use pocketmine\world\format\io\data\BaseNbtWorldData;
+use pocketmine\world\format\ThreadedWorldProvider;
 
 class GameRuleCommand extends Command implements PluginOwned {
 	private Language $lang;
@@ -59,6 +60,9 @@ class GameRuleCommand extends Command implements PluginOwned {
 			$g = WorldGameRules::mustGetGameRuleCollection($world);
 			$g->set($internal, $value);
 			$data = $world->getProvider()->getWorldData();
+			if (interface_exists(ThreadedWorldProvider::class)) {
+				$data = $data->get();
+			}
 			$args[] = $world->getFolderName();
 			if ($data instanceof BaseNbtWorldData) {
 				GameRuleUtil::save($data, $g);
