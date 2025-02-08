@@ -12,6 +12,7 @@ command.help: |
   /wx delete §7Delete a world.
   /wx duplicate §7Duplicate a world.
   /wx teleport §7Teleport to a world.
+  /wx default §7Update default world.
 
 command.info.usage: "§4Usage: /wx info <world>"
 command.info.not-exists: "§4World [0] does not exist."
@@ -72,3 +73,7 @@ command.gamerule.rule-not-exists: "§4Gamerule [0] not exists."
 command.gamerule.world-not-exists: "§4World [0] not exists."
 command.gamerule.success: "§aGamerule [0] set to [1] in world [2]."
 command.gamerule.error: "§4Error setting gamerule [0] to [1] in world [2]."
+
+command.default.usage: "§4Usage: /wx default <world>"
+command.default.world-not-exists: "§4World [0] not exists."
+command.default.success: "§aDefault world is [0] now."

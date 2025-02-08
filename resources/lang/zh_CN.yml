@@ -12,6 +12,7 @@ command.help: |
   /wx delete §7删除世界.
   /wx duplicate §7复制世界.
   /wx teleport §7传送到世界.
+  /wx default §7设置默认世界.
 
 command.info.usage: "§4用法: /wx info <世界>"
 command.info.not-exists: "§4世界 [0] 不存在."
@@ -71,3 +72,7 @@ command.gamerule.rule-not-exists: "§4游戏规则 [0] 不存在."
 command.gamerule.world-not-exists: "§4世界 [0] 不存在."
 command.gamerule.success: "§a世界 [2] 的游戏规则 [0] 设置为 [1]."
 command.gamerule.error: "§4设置世界 [2] 的游戏模式 [0] 为 [1] 出错."
+
+command.default.usage: "§4用法: /wx default <世界>"
+command.default.world-not-exists: "§4世界 [0] 不存在."
+command.default.success: "§a默认世界现在是 [0]."

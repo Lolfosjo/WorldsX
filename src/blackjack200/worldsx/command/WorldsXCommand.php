@@ -3,6 +3,7 @@
 namespace blackjack200\worldsx\command;
 
 use blackjack200\worldsx\command\subcommand\impl\CreateSubCommand;
+use blackjack200\worldsx\command\subcommand\impl\DefaultSubCommand;
 use blackjack200\worldsx\command\subcommand\impl\DuplicateSubCommand;
 use blackjack200\worldsx\command\subcommand\impl\HelpSubCommand;
 use blackjack200\worldsx\command\subcommand\impl\InfoSubCommand;
@@ -42,6 +43,7 @@ class WorldsXCommand extends Command implements PluginOwned {
 		$this->registerSubCommand('duplicate', DuplicateSubCommand::class, ['dup']);
 		$this->registerSubCommand('rename', RenameSubCommand::class);
 		$this->registerSubCommand('teleport', TeleportSubCommand::class, ['t', 'tp']);
+		$this->registerSubCommand('default', DefaultSubCommand::class, ['d']);
 	}
 
 	public function execute(CommandSender $sender, string $commandLabel, array $args) {
