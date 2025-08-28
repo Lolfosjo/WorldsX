@@ -41,10 +41,6 @@ class WorldsX extends PluginBase {
 		$registerCmd(new GameRuleCommand($language, $listener, $this));
 	}
 
-	protected function onDisable() : void {
-
-	}
-
 	protected function setupLanguage() : Language {
 		$languages = [
 			'en_US',
