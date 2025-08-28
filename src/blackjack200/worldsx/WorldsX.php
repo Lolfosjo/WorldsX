@@ -5,6 +5,7 @@ namespace blackjack200\worldsx;
 use blackjack200\worldsx\command\GameRuleCommand;
 use blackjack200\worldsx\command\WorldsXCommand;
 use blackjack200\worldsx\generator\VoidGenerator;
+use muqsit\vanillagenerator\generator\overworld\OverworldGenerator;
 use blackjack200\worldsx\lang\Language;
 use blackjack200\worldsx\session\WorldsXListener;
 use blackjack200\worldsx\world\types\GameRuleMapping;
@@ -18,6 +19,7 @@ use Symfony\Component\Filesystem\Path;
 class WorldsX extends PluginBase {
 	protected function onLoad() : void {
 		GeneratorManager::getInstance()->addGenerator(VoidGenerator::class, "void", fn() => null);
+        GeneratorManager::getInstance()->addGenerator(OverworldGenerator::class, "vanilla_normal", fn() => null);
 	}
 
 	protected function onEnable() : void {
