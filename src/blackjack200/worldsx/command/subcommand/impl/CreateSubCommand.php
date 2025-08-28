@@ -11,13 +11,24 @@ use pocketmine\world\generator\GeneratorManager;
 use pocketmine\world\WorldCreationOptions;
 
 class CreateSubCommand extends SubCommand {
+	
 	public function execute(CommandSender $sender, array $args) : void {
 		if (count($args) < 1) {
 			throw new InvalidCommandSyntaxException();
 		}
 		$worldName = $args[0];
 		$generatorName = $args[1] ?? "default";
-		$seed = Utils::javaStringHash($args[2] ?? random_bytes(16));
+		
+		if (isset($args[2])) {
+			if (is_numeric($args[2])) {
+				$seed = (int)$args[2];
+			} else {
+				$seed = Utils::javaStringHash($args[2]);
+			}
+		} else {
+			$seed = Utils::javaStringHash(random_bytes(16));
+		}
+		
 		if (WorldUtil::contains($worldName)) {
 			$this->mustSendTranslation($sender, "command.create.exists", [$worldName]);
 			return;
